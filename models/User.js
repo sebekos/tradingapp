@@ -18,6 +18,14 @@ const UserSchema = new mongoose.Schema({
         type: String,
         default: 1
     },
+    balance: {
+        type: Number,
+        default: 1000
+    },
+    trades: {
+        type: Array,
+        default: []
+    },
     date: {
         type: Date,
         default: Date.now

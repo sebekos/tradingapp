@@ -17,6 +17,7 @@ body {
     line-height: 1.6;
     background-color: #333;
     color: #333;
+    background-image: url("./img/showcase.jpeg");
 }
 
 a {
@@ -93,6 +94,7 @@ a {
     box-sizing: border-box;
     background-color: black;
     color: white;
+    opacity: 0.8;
 }
 
 .form textarea {
@@ -109,11 +111,14 @@ button {
 .navbar {
     background-color: black;
     display: grid;
+    position: absolute;
+    width: 100%;
     grid-template-columns: 1fr 1fr;
     align-items: center;
     height: 70px;
     color: white;
     border-bottom: 1px solid black;
+    opacity: 0.8;
 }
 
 .title {

@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import { login } from "../../redux/actions/auth";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
-const Login = () => {
+const Login = ({ login }) => {
     const [formData, setFormData] = useState({
         username: "",
         password: ""
@@ -15,6 +18,7 @@ const Login = () => {
 
     const onLogin = () => {
         console.log(formData);
+        login(formData);
     };
 
     const { username, password } = formData;
@@ -50,4 +54,8 @@ const Login = () => {
     );
 };
 
-export default Login;
+Login.propTypes = {
+    login: PropTypes.func.isRequired
+};
+
+export default connect(null, { login })(Login);

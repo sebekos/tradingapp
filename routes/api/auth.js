@@ -26,21 +26,20 @@ router.get("/", auth, async (req, res) => {
 router.post(
     "/",
     [
-        check("email", "Email is required or format is incorrect").isEmail(),
+        check("username", "Email is required or format is incorrect").isEmail(),
         check(
             "password",
             "Please enter a password with 6 or more characters"
         ).exists()
     ],
     async (req, res) => {
-        console.log(req.body);
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }
-        const { email, password } = req.body;
+        const { username, password } = req.body;
         try {
-            let user = await User.findOne({ email });
+            let user = await User.findOne({ email: username });
             if (!user) {
                 return res
                     .status(400)
@@ -58,7 +57,6 @@ router.post(
                     access: user.access
                 }
             };
-
             jwt.sign(
                 payload,
                 process.env.jwtSecret,

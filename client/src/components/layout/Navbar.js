@@ -13,6 +13,9 @@ const Navbar = ({ isAuthenticated }) => {
                 <Link to="/trade">Trade</Link>
             </div>
             <div className="links-item">
+                <Link to="/oauth">oAuth</Link>
+            </div>
+            <div className="links-item">
                 <Link to="/">Logout</Link>
             </div>
         </Fragment>
@@ -33,6 +36,10 @@ const Navbar = ({ isAuthenticated }) => {
             </div>
         </div>
     );
+};
+
+Navbar.propTypes = {
+    isAuthenticated: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => ({

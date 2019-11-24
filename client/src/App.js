@@ -8,6 +8,7 @@ import Login from "./components/auth/Login";
 import Dashboard from "./components/dashboard/Dashboard";
 import Trade from "./components/trade/Trade";
 import Navbar from "./components/layout/Navbar";
+import OAuth from "./components/oauth/OAuth";
 
 const App = () => {
     return (
@@ -18,6 +19,7 @@ const App = () => {
                     <Route exact path="/login" component={Login} />
                     <Route exact path="/dashboard" component={Dashboard} />
                     <Route exact path="/trade" component={Trade} />
+                    <Route excat path="/oauth" component={OAuth} />
                 </Switch>
             </Router>
         </Provider>

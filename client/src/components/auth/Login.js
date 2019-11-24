@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { login } from "../../redux/actions/auth";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 
-const Login = ({ login }) => {
+const Login = ({ login, auth: { isAuthenticated } }) => {
     const [formData, setFormData] = useState({
         username: "",
         password: ""
@@ -25,6 +26,7 @@ const Login = ({ login }) => {
 
     return (
         <div className="container">
+            {isAuthenticated ? <Redirect to="/dashboard" /> : null}
             <div className="login-container form">
                 <div className="form-group">
                     <input
@@ -54,8 +56,13 @@ const Login = ({ login }) => {
     );
 };
 
+const mapStateToProps = state => ({
+    auth: state.auth
+});
+
 Login.propTypes = {
-    login: PropTypes.func.isRequired
+    login: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired
 };
 
-export default connect(null, { login })(Login);
+export default connect(mapStateToProps, { login })(Login);

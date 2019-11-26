@@ -153,3 +153,9 @@ button {
     display: grid;
     grid-template-columns: 300px auto;
 }
+
+.oauth-container {
+    margin: 100px auto;
+    max-width: 400px;
+    text-align: center;
+}

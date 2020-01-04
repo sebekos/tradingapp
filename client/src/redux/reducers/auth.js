@@ -1,8 +1,9 @@
-import { LOGIN_SUCCESS, LOGIN_FAIL, USER_LOADED, AUTH_ERROR, AUTH_LOADING } from "../constants/types";
+import { LOGIN_SUCCESS, LOGIN_FAIL, USER_LOADED, AUTH_ERROR, AUTH_LOADING, O_AUTH_SUCCESS } from "../constants/types";
 
 const initialState = {
     token: localStorage.getItem("token"),
     isAuthenticated: false,
+    oAuth: false,
     loading: true,
     user: null
 };
@@ -29,6 +30,14 @@ export default function(state = initialState, action) {
                 ...state,
                 ...payload,
                 isAuthenticated: true,
+                loading: false
+            };
+        case O_AUTH_SUCCESS:
+            localStorage.setItem("tdtoken", payload);
+            return {
+                ...state,
+                ...payload,
+                oAuth: true,
                 loading: false
             };
         case LOGIN_FAIL:

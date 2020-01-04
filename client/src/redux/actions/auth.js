@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS, LOGIN_FAIL, USER_LOADED, AUTH_ERROR } from "../constants/types";
+import { LOGIN_SUCCESS, LOGIN_FAIL, USER_LOADED, AUTH_ERROR, O_AUTH_SUCCESS } from "../constants/types";
 import setAuthToken from '../../utils/setAuthToken';
 import axios from "axios";
 
@@ -7,7 +7,6 @@ export const loadUser = () => async dispatch => {
     if (localStorage.token) {
       setAuthToken(localStorage.token);
     }
-  
     try {
       const res = await axios.get('/api/auth');
       dispatch({
@@ -19,7 +18,7 @@ export const loadUser = () => async dispatch => {
         type: AUTH_ERROR
       });
     }
-  };
+};
 
 // Login User
 export const login = formData => async dispatch => {
@@ -41,4 +40,13 @@ export const login = formData => async dispatch => {
             type: LOGIN_FAIL
         });
     }
+};
+
+// oAuthLogin
+export const oAuthLogin = token => async dispatch => {
+  console.log('oauth sucess in actions')
+  dispatch({
+      type: O_AUTH_SUCCESS,
+      payload: token
+  });
 };

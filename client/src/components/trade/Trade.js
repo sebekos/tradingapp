@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Trade = () => {
+    const symbol = useState('')
+    
     return (
         <div className="container">
             <div className="trade-container form">

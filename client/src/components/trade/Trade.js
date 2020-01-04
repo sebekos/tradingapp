@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import { connect } from 'react-redux'
+import { getQuote } from '../../redux/actions/quote'
+import PropTypes from 'prop-types'
 
-const Trade = () => {
+const Trade = ({getQuote, auth: {tdtoken}}) => {
     const [symbol, setSymbol] = useState('')
 
     const onChange = e => {
@@ -9,6 +12,7 @@ const Trade = () => {
 
     const onSubmit = e => {
         console.log(symbol);
+        getQuote(symbol, tdtoken)
     }
 
     return (
@@ -24,4 +28,14 @@ const Trade = () => {
     );
 };
 
-export default Trade;
+const mapStateToProps = state => ({
+    auth: state.auth
+});
+
+Trade.propTypes = {
+    getQuote: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired
+};
+
+
+export default connect(mapStateToProps, {getQuote})(Trade);

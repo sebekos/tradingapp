@@ -4,3 +4,5 @@ export const USER_LOADED = "USER_LOADED";
 export const AUTH_ERROR = "AUTH_ERROR";
 export const AUTH_LOADING = "AUTH_LOADING";
 export const O_AUTH_SUCCESS = "O_AUTH_SUCCESS";
+export const QUOTE_SUCCESS = "QUOTE_SUCCESS";
+export const QUOTE_FAILED = "QUOTE_FAILED";

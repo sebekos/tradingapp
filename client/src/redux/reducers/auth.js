@@ -2,6 +2,7 @@ import { LOGIN_SUCCESS, LOGIN_FAIL, USER_LOADED, AUTH_ERROR, AUTH_LOADING, O_AUT
 
 const initialState = {
     token: localStorage.getItem("token"),
+    tdtoken: localStorage.getItem("tdtoken"),
     isAuthenticated: false,
     oAuth: false,
     loading: true,
@@ -38,6 +39,7 @@ export default function(state = initialState, action) {
                 ...state,
                 ...payload,
                 oAuth: true,
+                tdtoken: payload,
                 loading: false
             };
         case LOGIN_FAIL:

@@ -7,11 +7,12 @@ export const getQuote = (symbol, tdtoken) => async dispatch => {
       const api = 'https://api.tdameritrade.com/v1/marketdata/' + symbol + '/quotes?apikey=SEBEKOS6';
       const token = 'Bearer ' + tdtoken;
       console.log(token);
+      console.log(symbol)
       try {
             const res = await axios.get(api , { headers: {"Authorization" : token } });
             dispatch({
                   type: QUOTE_SUCCESS,
-                  payload: res.data
+                  payload: res['data'][symbol]
             });
       } catch (err) {
             console.log(err)

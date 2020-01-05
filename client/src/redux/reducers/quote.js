@@ -13,6 +13,7 @@ export default function(state = initialState, action) {
           return {
             ...state,
             data: payload,
+            symbol: payload.symbol,
             loading: false
           };
         case QUOTE_FAILED:

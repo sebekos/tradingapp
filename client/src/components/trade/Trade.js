@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { connect } from 'react-redux'
 import { getQuote } from '../../redux/actions/quote'
+import SymbolInfo from './SymbolInfo'
 import PropTypes from 'prop-types'
 
-const Trade = ({getQuote, auth: {tdtoken}}) => {
+const Trade = ({getQuote, auth: {tdtoken}, quote}) => {
     const [symbol, setSymbol] = useState('')
 
     const onChange = e => {
@@ -11,8 +12,8 @@ const Trade = ({getQuote, auth: {tdtoken}}) => {
     }
 
     const onSubmit = e => {
-        console.log(symbol);
-        getQuote(symbol, tdtoken)
+        console.log(symbol.toUpperCase());
+        getQuote(symbol.toUpperCase(), tdtoken)
     }
 
     return (
@@ -24,17 +25,20 @@ const Trade = ({getQuote, auth: {tdtoken}}) => {
                 </div>
                 <div className="form-group"></div>
             </div>
+            {quote.data ? <SymbolInfo data={quote.data} /> : null}
         </div>
     );
 };
 
 const mapStateToProps = state => ({
-    auth: state.auth
+    auth: state.auth,
+    quote: state.quote
 });
 
 Trade.propTypes = {
     getQuote: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired
+    auth: PropTypes.object.isRequired,
+    quote: PropTypes.object.isRequired
 };
 
 

@@ -159,3 +159,28 @@ button {
     max-width: 400px;
     text-align: center;
 }
+
+.symbol-container table{
+    margin: auto;
+    color: white;
+    background-color: black;
+    border-collapse: collapse;
+}
+
+.symbol-container table td{
+    border: 1px solid grey;
+    padding: 5px 10px;
+}
+
+.symbol-container table th{
+    border: 1px solid grey;
+    padding: 15px;
+}
+
+.td-trade{
+    padding: 0px !important;
+}
+
+.btn-trade{
+    height: 100%;
+}

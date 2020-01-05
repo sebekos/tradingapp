@@ -1,6 +1,7 @@
 import { LOGIN_SUCCESS, LOGIN_FAIL, USER_LOADED, AUTH_ERROR, O_AUTH_SUCCESS } from "../constants/types";
 import setAuthToken from '../../utils/setAuthToken';
 import axios from "axios";
+import qs from 'query-string'
 
 // Load user
 export const loadUser = () => async dispatch => {
@@ -44,10 +45,29 @@ export const login = formData => async dispatch => {
 
 // oAuthLogin
 export const oAuthLogin = token => async dispatch => {
-  console.log('oauth sucess in actions')
-  console.log(token)
-  dispatch({
-      type: O_AUTH_SUCCESS,
-      payload: token
-  });
+  delete axios.defaults.headers.common['x-auth-token'];
+  const config = {
+      headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+      }
+  };
+  const data = qs.stringify({
+    "grant_type" : "authorization_code",
+    "refresh_token" : "",
+    "access_type" : "offline",
+    "code" : token,
+    "client_id" : "SEBEKOS6",
+    "redirect_uri" : "http://localhost:3000/oauth"
+  })
+
+  try {
+      const res = await axios.post("https://api.tdameritrade.com/v1/oauth2/token", data, config);
+      dispatch({
+          type: O_AUTH_SUCCESS,
+          payload: res.data.access_token
+      });
+  } catch (err) {
+      const errors = err.response.data.errors;
+      console.log(errors);
+  }
 };

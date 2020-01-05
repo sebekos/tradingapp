@@ -37,7 +37,6 @@ export default function(state = initialState, action) {
             localStorage.setItem("tdtoken", payload);
             return {
                 ...state,
-                ...payload,
                 oAuth: true,
                 tdtoken: payload,
                 loading: false

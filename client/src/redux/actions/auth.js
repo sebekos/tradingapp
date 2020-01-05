@@ -45,6 +45,7 @@ export const login = formData => async dispatch => {
 // oAuthLogin
 export const oAuthLogin = token => async dispatch => {
   console.log('oauth sucess in actions')
+  console.log(token)
   dispatch({
       type: O_AUTH_SUCCESS,
       payload: token

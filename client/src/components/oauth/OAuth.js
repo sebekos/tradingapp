@@ -18,7 +18,7 @@ const OAuth = ({ location, oAuthLogin }) => {
     }, []);
 
     const link =
-        "https://auth.tdameritrade.com/oauth?client_id=SEBEKOS6@AMER.OAUTHAP&response_type=code&redirect_uri=http://localhost:3000/oauth";
+        "https://auth.tdameritrade.com/oauth?client_id=SEBEKOS6@AMER.OAUTHAP&response_type=code&redirect_uri=https://desolate-falls-88833.herokuapp.com/oauth";
 
     return (
         <div className="container">

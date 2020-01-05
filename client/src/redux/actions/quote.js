@@ -3,7 +3,7 @@ import axios from "axios";
 
 // Get quote
 export const getQuote = (symbol, tdtoken) => async dispatch => {
-      const api = 'https://api.tdameritrade.com/v1/marketdata/BSPM/quotes?apikey=SEBEKOS6';
+      const api = 'https://api.tdameritrade.com/v1/marketdata/' + symbol + '/quotes?apikey=SEBEKOS6';
       const token = 'Bearer ' + tdtoken;
       try {
             const res = await axios.get(api , { headers: {"Authorization" : token } });

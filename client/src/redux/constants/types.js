@@ -1,8 +1,12 @@
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAIL = "LOGIN_FAIL";
+export const LOGOUT = "LOGOUT";
+export const CLEAR_PROFILE = "CLEAR_PROFILE";
 export const USER_LOADED = "USER_LOADED";
 export const AUTH_ERROR = "AUTH_ERROR";
 export const AUTH_LOADING = "AUTH_LOADING";
 export const O_AUTH_SUCCESS = "O_AUTH_SUCCESS";
 export const QUOTE_SUCCESS = "QUOTE_SUCCESS";
 export const QUOTE_FAILED = "QUOTE_FAILED";
+export const TRADE_SUCCESS = "TRADE_SUCCESS"
+export const TRADE_FAILURE = "TRADE_FAILURE"

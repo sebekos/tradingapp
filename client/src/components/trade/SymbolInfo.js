@@ -1,12 +1,27 @@
 import React from 'react'
+import { newTrade } from '../../redux/actions/trade'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
-const SymbolInfo = ({data:{symbol, description, lastPrice, lastSize, bidPrice, bidSize, askPrice, askSize}}) => {
+const SymbolInfo = ({data:{symbol, description, lastPrice, lastSize, bidPrice, bidSize, askPrice, askSize}, newTrade}) => {
+
+      const onTrade = e => {
+            console.log(e.target.value);
+            const formData = {
+                  symbol,
+                  side: e.target.value,
+                  shares: 100,
+                  entry_price: lastPrice
+            }
+            newTrade(formData)
+      }
+
       return (
             <div className="symbol-container">
                   <table>
                         <thead>
                               <tr>
-                                    <th colspan='2'>{description}</th>
+                                    <th colSpan='2'>{description}</th>
                               </tr>
                         </thead>
                         <tbody>
@@ -28,10 +43,10 @@ const SymbolInfo = ({data:{symbol, description, lastPrice, lastSize, bidPrice, b
                               </tr>
                               <tr>
                                     <td className="td-trade">
-                                          <button className="btn btn-success btn-trade">Buy</button>
+                                          <button value="1" onClick={onTrade} className="btn btn-success btn-trade">Buy</button>
                                     </td>
                                     <td className="td-trade">
-                                          <button className="btn btn-danger btn-trade">Sell</button>
+                                          <button value="0" onClick={onTrade} className="btn btn-danger btn-trade">Short</button>
                                     </td>
                               </tr>
                         </tbody>
@@ -40,4 +55,15 @@ const SymbolInfo = ({data:{symbol, description, lastPrice, lastSize, bidPrice, b
       )
 }
 
-export default SymbolInfo
+const mapStateToProps = state => ({
+      auth: state.auth,
+      quote: state.quote
+  });
+  
+  SymbolInfo.propTypes = {
+      newTrade: PropTypes.func.isRequired,
+      auth: PropTypes.object.isRequired,
+      quote: PropTypes.object.isRequired
+  };
+
+export default connect(mapStateToProps, { newTrade })( SymbolInfo )

@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS, LOGIN_FAIL, USER_LOADED, AUTH_ERROR, O_AUTH_SUCCESS } from "../constants/types";
+import { LOGIN_SUCCESS, LOGIN_FAIL, USER_LOADED, AUTH_ERROR, O_AUTH_SUCCESS, LOGOUT, CLEAR_PROFILE } from "../constants/types";
 import setAuthToken from '../../utils/setAuthToken';
 import axios from "axios";
 import qs from 'query-string'
@@ -70,4 +70,10 @@ export const oAuthLogin = token => async dispatch => {
       const errors = err.response.data.errors;
       console.log(errors);
   }
+};
+
+// Logout / Clear profile
+export const logout = () => dispatch => {
+  dispatch({ type: CLEAR_PROFILE });
+  dispatch({ type: LOGOUT });
 };

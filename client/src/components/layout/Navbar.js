@@ -31,7 +31,7 @@ const Navbar = ({ isAuthenticated, logout }) => {
     const guestLinks = (
         <Fragment>
             <div className="links-item">
-                <Link to="/login">Login</Link>
+                <Link to="/">Login</Link>
             </div>
         </Fragment>
     );

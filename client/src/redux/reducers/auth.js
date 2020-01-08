@@ -44,7 +44,7 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 oAuth: true,
-                tdtoken: payload,
+                tdtoken: payload.access_token,
                 loading: false
             };
         case LOGIN_FAIL:
@@ -57,6 +57,7 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 token: null,
+                tdtoken: null,
                 isAuthenticated: false,
                 loading: false
             };

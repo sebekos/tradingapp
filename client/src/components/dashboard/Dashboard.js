@@ -1,14 +1,8 @@
-import React, { useEffect } from "react";
-import { getUserTrades } from '../../redux/actions/trade'
+import React from "react";
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-const Dashboard = ({ getUserTrades }) => {
-
-    useEffect(() => {
-        getUserTrades()
-    }, [getUserTrades]);
-
+const Dashboard = ({ auth:{token} }) => {
     return (
         <div className="container">
             <div className="trade-container form">
@@ -18,8 +12,12 @@ const Dashboard = ({ getUserTrades }) => {
     );
 };
 
+const mapStateToProps = state => ({
+    auth: state.auth
+})
+
 Dashboard.propTypes = {
-    getUserTrades: PropTypes.func.isRequired
+    auth: PropTypes.object.isRequired
 }
 
-export default connect(null, { getUserTrades })(Dashboard);
+export default connect( mapStateToProps, null)(Dashboard);

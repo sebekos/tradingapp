@@ -2,7 +2,8 @@ import { TRADE_SUCCESS, TRADE_FAILURE, GET_USER_TRADES, GET_TRADES_FAILED } from
 import axios from "axios";
 
 // Get user trades
-export const getUserTrades = () => async dispatch => {
+export const getUserTrades = (token) => async dispatch => {
+      axios.defaults.headers.common['x-auth-token'] = token;
       try {
             const res = await axios.get(`/api/trade/user`);
             dispatch({

@@ -6,6 +6,7 @@ export const getQuote = (symbol, tdtoken) => async dispatch => {
       delete axios.defaults.headers.common['x-auth-token'];
       const api = 'https://api.tdameritrade.com/v1/marketdata/' + symbol + '/quotes?apikey=SEBEKOS6';
       const token = 'Bearer ' + tdtoken;
+      console.log(token);
       try {
             const res = await axios.get(api , { headers: {"Authorization" : token } });
             dispatch({

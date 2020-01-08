@@ -26,10 +26,10 @@ export default function(state = initialState, action) {
             user: payload
           };
         case LOGIN_SUCCESS:
-            var t = new Date();
-            t.setSeconds(t.getMinutes() + 30);
+            var t1 = new Date();
+            t1.setSeconds(t1.getMinutes() + 30);
             localStorage.setItem("token", payload.token);
-            localStorage.setItem("token_expires_at", t);
+            localStorage.setItem("token_expires_at", t1);
             return {
                 ...state,
                 ...payload,
@@ -37,10 +37,10 @@ export default function(state = initialState, action) {
                 loading: false
             };
         case O_AUTH_SUCCESS:
-            var t = new Date();
-            t.setSeconds(t.getSeconds() + payload.expires_in);
+            var t2 = new Date();
+            t2.setSeconds(t2.getSeconds() + payload.expires_in);
             localStorage.setItem("tdtoken", payload.access_token);
-            localStorage.setItem("tdtoken_expires_at", t);
+            localStorage.setItem("tdtoken_expires_at", t2);
             return {
                 ...state,
                 oAuth: true,
@@ -51,6 +51,9 @@ export default function(state = initialState, action) {
         case LOGOUT:
         case AUTH_ERROR:
             localStorage.removeItem("token");
+            localStorage.removeItem("token_expires_at");
+            localStorage.removeItem("tdtoken");
+            localStorage.removeItem("tdtoken_expires_at");
             return {
                 ...state,
                 token: null,

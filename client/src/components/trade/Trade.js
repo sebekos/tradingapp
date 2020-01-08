@@ -29,7 +29,7 @@ const Trade = ({getQuote, auth: {tdtoken}, quote, trade: {trades}}) => {
                 </form>
             </div>
             {quote.data ? <SymbolInfo data={quote.data} /> : null}
-            {trades.length > 0 ? trades.map(item => {return <TradeItem data={item}/>}): null}
+            {trades.length > 0 ? trades.map((item, index) => {return <TradeItem key={`trade-${index}`} data={item}/>}): null}
         </div>
     );
 };

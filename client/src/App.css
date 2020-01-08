@@ -183,12 +183,13 @@ button {
 
 .btn-trade{
     height: 100%;
+    width: 100%;
 }
 
 .trade-item{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    max-width: 500px;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr; 
+    max-width: 700px;
     white-space: nowrap;
     margin: 2px auto;
     color: white;
@@ -196,4 +197,6 @@ button {
     border: 1px solid grey;
     border-collapse: collapse;
     padding: 5px;
+    align-items: center;
+    justify-items: center;
 }

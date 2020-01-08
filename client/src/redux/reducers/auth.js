@@ -26,7 +26,10 @@ export default function(state = initialState, action) {
             user: payload
           };
         case LOGIN_SUCCESS:
+            var t = new Date();
+            t.setSeconds(t.getMinutes() + 30);
             localStorage.setItem("token", payload.token);
+            localStorage.setItem("token_expires_at", t);
             return {
                 ...state,
                 ...payload,
@@ -34,7 +37,10 @@ export default function(state = initialState, action) {
                 loading: false
             };
         case O_AUTH_SUCCESS:
-            localStorage.setItem("tdtoken", payload);
+            var t = new Date();
+            t.setSeconds(t.getSeconds() + payload.expires_in);
+            localStorage.setItem("tdtoken", payload.access_token);
+            localStorage.setItem("tdtoken_expires_at", t);
             return {
                 ...state,
                 oAuth: true,

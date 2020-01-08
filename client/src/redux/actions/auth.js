@@ -64,7 +64,7 @@ export const oAuthLogin = token => async dispatch => {
       const res = await axios.post("https://api.tdameritrade.com/v1/oauth2/token", data, config);
       dispatch({
           type: O_AUTH_SUCCESS,
-          payload: res.data.access_token
+          payload: res.data
       });
   } catch (err) {
       const errors = err.response.data.errors;

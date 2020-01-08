@@ -145,7 +145,7 @@ button {
 }
 
 .trade-container {
-    margin: 100px auto;
+    margin: 100px auto 20px;
     width: 400px;
 }
 
@@ -161,7 +161,7 @@ button {
 }
 
 .symbol-container table{
-    margin: auto;
+    margin: 20px auto;
     color: white;
     background-color: black;
     border-collapse: collapse;
@@ -183,4 +183,17 @@ button {
 
 .btn-trade{
     height: 100%;
+}
+
+.trade-item{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    max-width: 500px;
+    white-space: nowrap;
+    margin: 2px auto;
+    color: white;
+    background-color: black;
+    border: 1px solid grey;
+    border-collapse: collapse;
+    padding: 5px;
 }

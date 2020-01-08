@@ -17,7 +17,7 @@ export default function(state = initialState, action) {
         case TRADE_SUCCESS:
           return {
             ...state,
-            trades: [...state.trades, payload],
+            trades: [payload, ...state.trades],
             loading: false
           };
         case TRADE_FAILURE:

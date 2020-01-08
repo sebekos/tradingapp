@@ -1,15 +1,32 @@
-import { TRADE_SUCCESS, TRADE_FAILURE } from "../constants/types";
+import { TRADE_SUCCESS, TRADE_FAILURE, GET_USER_TRADES, GET_TRADES_FAILED } from "../constants/types";
 import axios from "axios";
 
+// Get user trades
+export const getUserTrades = () => async dispatch => {
+      try {
+            const res = await axios.get(`/api/trade/user`);
+            dispatch({
+                  type: GET_USER_TRADES,
+                  payload: res.data
+            });
+      } catch (err) {
+            const errors = err.response.data.errors;
+            dispatch({
+                  type: GET_TRADES_FAILED,
+                  errors: errors
+            });
+      }
+}
+
 // Get quote
-export const newTrade = (formData) => async dispatch => {
+export const newTrade = (formData, token) => async dispatch => {
+      axios.defaults.headers.common['x-auth-token'] = token;
       const config = {
             headers: {
                   "Content-Type": "application/json"
             }
       };
       const body = JSON.stringify(formData);
-      console.log('Trying...');
       try {
             const res = await axios.post("/api/trade", body, config);
             dispatch({
@@ -19,7 +36,8 @@ export const newTrade = (formData) => async dispatch => {
       } catch (err) {
             const errors = err.response.data.errors;
             dispatch({
-                  type: TRADE_FAILURE
+                  type: TRADE_FAILURE,
+                  errors: errors
             });
       }
 };

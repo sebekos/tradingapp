@@ -1,22 +1,30 @@
-import { TRADE_SUCCESS, TRADE_FAILURE } from "../constants/types";
+import { TRADE_SUCCESS, TRADE_FAILURE, GET_USER_TRADES, GET_TRADES_FAILED } from "../constants/types";
 
 const initialState = {
-    trades: null,
-    loading: true
+    trades: [],
+    loading: true,
+    errors: null
 };
 
 export default function(state = initialState, action) {
     const { type, payload } = action;
     switch (type) {
+        case GET_USER_TRADES:
+          return {
+            ...state,
+            trades: payload
+          }
         case TRADE_SUCCESS:
           return {
             ...state,
-            data: payload,
+            trades: [...state.trades, payload],
             loading: false
           };
         case TRADE_FAILURE:
+        case GET_TRADES_FAILED:
           return {
             ...state,
+            errors: payload,
             loading: false
           };
         default:

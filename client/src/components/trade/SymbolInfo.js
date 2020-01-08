@@ -1,19 +1,21 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { newTrade } from '../../redux/actions/trade'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-const SymbolInfo = ({data:{symbol, description, lastPrice, lastSize, bidPrice, bidSize, askPrice, askSize}, newTrade}) => {
+const SymbolInfo = ({data:{symbol, description, lastPrice, lastSize, bidPrice, bidSize, askPrice, askSize}, newTrade, auth: {token}}) => {
+
+      const [shares, setShares] = useState(100)
 
       const onTrade = e => {
             console.log(e.target.value);
             const formData = {
                   symbol,
                   side: e.target.value,
-                  shares: 100,
+                  shares: shares,
                   entry_price: lastPrice
             }
-            newTrade(formData)
+            newTrade(formData, token)
       }
 
       return (
@@ -58,12 +60,12 @@ const SymbolInfo = ({data:{symbol, description, lastPrice, lastSize, bidPrice, b
 const mapStateToProps = state => ({
       auth: state.auth,
       quote: state.quote
-  });
+});
   
-  SymbolInfo.propTypes = {
+SymbolInfo.propTypes = {
       newTrade: PropTypes.func.isRequired,
       auth: PropTypes.object.isRequired,
       quote: PropTypes.object.isRequired
-  };
+};
 
 export default connect(mapStateToProps, { newTrade })( SymbolInfo )

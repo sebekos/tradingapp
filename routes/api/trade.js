@@ -5,6 +5,24 @@ const { check, validationResult } = require("express-validator");
 const auth = require("../../middleware/auth");
 const Trade = require("../../models/Trade");
 
+// @route       GET api/trade/user
+// @description Get user trades
+// @access      private
+router.get("/user", auth, async (req, res) => {
+    try {
+        const trades = await Trade.aggregate([
+        {
+            $match: {
+            user: `${req.user.id}`
+            }
+        }
+        ]).sort({ listdate: -1 });
+        res.json(trades);
+    } catch (err) {
+        res.status(500).send("Server Error");
+    }
+    });
+
 // @route       POST api/trade
 // @description Create trade
 // @access      Private

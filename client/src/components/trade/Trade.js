@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { connect } from 'react-redux'
-import { getQuote } from '../../redux/actions/quote'
+import { getQuote, getYearlyChart } from '../../redux/actions/quote'
 import SymbolInfo from './SymbolInfo'
 import TradeItem from './TradeItem'
 import PropTypes from 'prop-types'
+import YearlyChart from "./YearlyChart";
 
-const Trade = ({getQuote, auth: {tdtoken}, quote, trade: {trades}}) => {
+const Trade = ({getQuote, getYearlyChart, auth: {tdtoken}, quote, trade: {trades}}) => {
 
     const [symbol, setSymbol] = useState('')
 
@@ -15,7 +16,8 @@ const Trade = ({getQuote, auth: {tdtoken}, quote, trade: {trades}}) => {
 
     const onSubmit = e => {
         e.preventDefault();
-        getQuote(symbol.toUpperCase(), tdtoken)
+        getQuote(symbol.toUpperCase(), tdtoken);
+        getYearlyChart(symbol.toUpperCase(), tdtoken);
     }
 
     return (
@@ -28,6 +30,7 @@ const Trade = ({getQuote, auth: {tdtoken}, quote, trade: {trades}}) => {
                     </div>
                 </form>
             </div>
+            {quote.yearlychart ? <YearlyChart data={quote.yearlychart} /> : null}
             {quote.data ? <SymbolInfo data={quote.data} /> : null}
             {trades.length > 0 ? trades.map((item, index) => {return <TradeItem key={`trade-${index}`} data={item}/>}): null}
         </div>
@@ -44,8 +47,9 @@ Trade.propTypes = {
     getQuote: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
     quote: PropTypes.object.isRequired,
-    trade: PropTypes.object.isRequired
+    trade: PropTypes.object.isRequired,
+    getYearlyChart: PropTypes.func.isRequired
 };
 
 
-export default connect(mapStateToProps, {getQuote})(Trade);
+export default connect(mapStateToProps, { getQuote, getYearlyChart})(Trade);

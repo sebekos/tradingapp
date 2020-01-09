@@ -10,6 +10,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import Trade from "./components/trade/Trade";
 import Navbar from "./components/layout/Navbar";
 import OAuth from "./components/oauth/OAuth";
+import Alert from './components/layout/Alert';
 
 const App = () => {
     useEffect(() => {
@@ -20,6 +21,7 @@ const App = () => {
         <Provider store={store}>
             <Router>
                 <Navbar />
+                <Alert />
                 <Switch>
                     <Route exact path="/" component={Login} />
                     <PrivateRoute exact path="/dashboard" component={Dashboard} />

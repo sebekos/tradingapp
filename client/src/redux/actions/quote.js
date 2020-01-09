@@ -1,4 +1,5 @@
 import { QUOTE_SUCCESS, QUOTE_FAILED, YEARLY_CHART_SUCCESS, CHART_FAILED } from "../constants/types";
+import { setAlert } from './alert'
 import axios from "axios";
 
 // Get quote
@@ -13,10 +14,10 @@ export const getQuote = (symbol, tdtoken) => async dispatch => {
                   payload: res['data'][symbol]
             });
       } catch (err) {
-            console.log(err)
             dispatch({
                   type: QUOTE_FAILED
             });
+            dispatch(setAlert('Please login oAuth', 'danger'))
       }
 };
 
@@ -32,7 +33,6 @@ export const getYearlyChart = (symbol, tdtoken) => async dispatch => {
                   payload: res.data
             });
       } catch (err) {
-            console.log(err)
             dispatch({
                   type: CHART_FAILED
             });

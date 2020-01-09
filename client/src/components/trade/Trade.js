@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from 'react-redux'
 import { getQuote, getYearlyChart } from '../../redux/actions/quote'
+import { getUserTrades } from '../../redux/actions/trade'
 import SymbolInfo from './SymbolInfo'
 import TradeItem from './TradeItem'
 import PropTypes from 'prop-types'
 import YearlyChart from "./YearlyChart";
 
-const Trade = ({getQuote, getYearlyChart, auth: {tdtoken}, quote, trade: {trades}}) => {
+const Trade = ({getQuote, getYearlyChart, getUserTrades, auth: {tdtoken, token}, quote, trade: {trades}}) => {
+
+    useEffect(() => {
+        getUserTrades(token);
+    }, []);
 
     const [symbol, setSymbol] = useState('')
 
@@ -23,7 +28,7 @@ const Trade = ({getQuote, getYearlyChart, auth: {tdtoken}, quote, trade: {trades
     return (
         <div className="container">
             <div className="trade-container form">
-                <form onClick={onSubmit}>
+                <form onSubmit={onSubmit}>
                     <div className='form-group'>
                         <input onChange={onChange} placeholder="Symbol" type="text" value={symbol} />
                         <button type="submit" className="btn btn-primary">Search</button>
@@ -43,13 +48,19 @@ const mapStateToProps = state => ({
     trade: state.trade
 });
 
+const mapDispatchToProps = {
+    getQuote,
+    getYearlyChart,
+    getUserTrades
+}
+
 Trade.propTypes = {
-    getQuote: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
     quote: PropTypes.object.isRequired,
     trade: PropTypes.object.isRequired,
-    getYearlyChart: PropTypes.func.isRequired
+    getQuote: PropTypes.func.isRequired,
+    getYearlyChart: PropTypes.func.isRequired,
+    getUserTrades: PropTypes.func.isRequired
 };
 
-
-export default connect(mapStateToProps, { getQuote, getYearlyChart})(Trade);
+export default connect(mapStateToProps, mapDispatchToProps)(Trade);

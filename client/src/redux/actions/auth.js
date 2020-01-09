@@ -1,5 +1,4 @@
 import { LOGIN_SUCCESS, LOGIN_FAIL, USER_LOADED, AUTH_ERROR, O_AUTH_SUCCESS, LOGOUT, CLEAR_PROFILE } from "../constants/types";
-import { getUserTrades } from './trade'
 import setAuthToken from '../../utils/setAuthToken';
 import axios from "axios";
 import qs from 'query-string'
@@ -9,7 +8,6 @@ export const loadUser = () => async dispatch => {
     if (localStorage.token) {
       console.log('load user token')
       setAuthToken(localStorage.token);
-      dispatch(getUserTrades(localStorage.token));
     }
     try {
       const res = await axios.get('/api/auth');
@@ -17,7 +15,6 @@ export const loadUser = () => async dispatch => {
         type: USER_LOADED,
         payload: res.data
       });
-
     } catch (err) {
       dispatch({
         type: AUTH_ERROR

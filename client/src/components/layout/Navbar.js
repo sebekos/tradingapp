@@ -17,7 +17,10 @@ const Navbar = ({ isAuthenticated, logout }) => {
                 <Link to="/dashboard">Home</Link>
             </div>
             <div className="links-item">
-                <Link to="/trade">Trade</Link>
+                <Link to="/livetrade">Live Trade</Link>
+            </div>
+            <div className="links-item">
+                <Link to="/papertrade">Paper Trade</Link>
             </div>
             <div className="links-item">
                 <Link to="/oauth">oAuth</Link>

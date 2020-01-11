@@ -8,7 +8,7 @@ import PropTypes from 'prop-types'
 import YearlyChart from "./YearlyChart";
 import MinuteChart from "./MinuteChart";
 
-const Trade = ({getQuote, getYearlyChart, getMinuteChart, getUserTrades, auth: {tdtoken, token}, quote, trade: {trades}}) => {
+const PaperTrade = ({getQuote, getYearlyChart, getMinuteChart, getUserTrades, auth: {tdtoken, token}, quote, trade: {trades}}) => {
 
     useEffect(() => {
         getUserTrades(token);
@@ -59,7 +59,7 @@ const mapDispatchToProps = {
     getMinuteChart
 }
 
-Trade.propTypes = {
+PaperTrade.propTypes = {
     auth: PropTypes.object.isRequired,
     quote: PropTypes.object.isRequired,
     trade: PropTypes.object.isRequired,
@@ -69,4 +69,4 @@ Trade.propTypes = {
     getMinuteChart: PropTypes.func.isRequired
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Trade);
+export default connect(mapStateToProps, mapDispatchToProps)(PaperTrade);

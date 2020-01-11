@@ -161,6 +161,10 @@ button {
     text-align: center;
 }
 
+.oauth-container div{
+    margin: 10px auto;
+}
+
 .symbol-container table{
     margin: 20px auto;
     color: white;

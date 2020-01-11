@@ -4,12 +4,21 @@ import Chart from 'react-apexcharts'
 const YearlyChart = ({data: {symbol, candles, empty}}) => {
       const chartData = {
             options: {
+                  tooltip: {
+                        enabled: false
+                  },
                   chart: {
-                        id: 'apexchart-yearly',
+                        id: 'apexchart-minute',
                         background: 'black',
                         animations: {
                               enabled: false
+                        },
+                        zoom: {
+                              autoScaleYaxis: true
                         }
+                  },
+                  title: {
+                        text: `${symbol} - 2 Day 1 Minute`
                   },
                   grid: {
                         position: 'back',
@@ -24,6 +33,12 @@ const YearlyChart = ({data: {symbol, candles, empty}}) => {
                                     show: true
                               }
                         },  
+                  },
+                  xaxis: {
+                        labels: {
+                              show: true,
+                              format: 'h:mm'
+                        }
                   }
             },
             series: [{

@@ -39,7 +39,7 @@ const Trade = ({getQuote, getYearlyChart, getMinuteChart, getUserTrades, auth: {
                 </form>
             </div>
             {quote.minutechart ? <MinuteChart data={quote.minutechart} /> : null}
-            {/* {quote.yearlychart ? <YearlyChart data={quote.yearlychart} /> : null} */}
+            {quote.yearlychart ? <YearlyChart data={quote.yearlychart} /> : null}
             {quote.data ? <SymbolInfo data={quote.data} /> : null}
             {trades.length > 0 ? trades.map((item, index) => {return <TradeItem key={`trade-${index}`} data={item}/>}): null}
         </div>

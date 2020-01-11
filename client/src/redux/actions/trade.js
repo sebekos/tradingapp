@@ -11,7 +11,6 @@ export const getUserTrades = (token) => async dispatch => {
                   type: GET_USER_TRADES,
                   payload: res.data
             });
-            dispatch(setAlert('Got user trades', 'success'))
       } catch (err) {
             const errors = err.response.data.errors;
             dispatch({

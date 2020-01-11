@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import qs from "query-string";
 import { Redirect } from "react-router-dom";
-import { oAuthLogin } from '../../redux/actions/auth'
+import { oAuthLogin, oAuthRefresh } from '../../redux/actions/auth'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 
-const OAuth = ({ location, oAuthLogin }) => {
+const OAuth = ({ location, oAuthLogin, oAuthRefresh, auth: {tdrefresh} }) => {
     
     const [code, setCode] = useState("");
 
@@ -17,6 +17,10 @@ const OAuth = ({ location, oAuthLogin }) => {
         }
     }, []);
 
+    const onRefresh = () => {
+        oAuthRefresh(tdrefresh);
+    }
+
     const link =
         "https://auth.tdameritrade.com/oauth?client_id=SEBEKOS6@AMER.OAUTHAP&response_type=code&redirect_uri=http://localhost:3000/oauth";
 
@@ -24,9 +28,16 @@ const OAuth = ({ location, oAuthLogin }) => {
         <div className="container">
             {code ? <Redirect to="/trade" /> : "No"}
             <div className="oauth-container">
-                <a className="btn btn-primary" href={link}>
-                    Login To Thinkorswim
-                </a>
+                <div>
+                    <a className="btn btn-primary" href={link}>
+                        Login To Thinkorswim
+                    </a>
+                </div>
+                <div>
+                    <button onClick={onRefresh} className='btn btn-success'>
+                        Refresh Token
+                    </button>
+                </div>
             </div>
         </div>
     );
@@ -38,7 +49,8 @@ const mapStateToProps = state => ({
 
 OAuth.propTypes = {
     oAuthLogin: PropTypes.func.isRequired,
+    oAuthRefresh: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired
 };
 
-export default connect(mapStateToProps, {oAuthLogin})(OAuth);
+export default connect(mapStateToProps, {oAuthLogin, oAuthRefresh})(OAuth);

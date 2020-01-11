@@ -3,6 +3,7 @@ import { LOGIN_SUCCESS, LOGIN_FAIL, USER_LOADED, AUTH_ERROR, AUTH_LOADING, O_AUT
 const initialState = {
     token: localStorage.getItem("token"),
     tdtoken: localStorage.getItem("tdtoken"),
+    tdrefresh: null,
     isAuthenticated: false,
     oAuth: false,
     loading: true,
@@ -40,11 +41,13 @@ export default function(state = initialState, action) {
             var t2 = new Date();
             t2.setSeconds(t2.getSeconds() + payload.expires_in);
             localStorage.setItem("tdtoken", payload.access_token);
+            localStorage.setItem("tdfresh", payload.refresh_token);
             localStorage.setItem("tdtoken_expires_at", t2);
             return {
                 ...state,
                 oAuth: true,
                 tdtoken: payload.access_token,
+                tdrefresh: payload.refresh_token,
                 loading: false
             };
         case LOGIN_FAIL:
@@ -54,6 +57,7 @@ export default function(state = initialState, action) {
             localStorage.removeItem("token_expires_at");
             localStorage.removeItem("tdtoken");
             localStorage.removeItem("tdtoken_expires_at");
+            localStorage.removeItem("tdfresh");
             return {
                 ...state,
                 token: null,

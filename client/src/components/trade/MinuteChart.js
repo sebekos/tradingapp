@@ -4,12 +4,21 @@ import Chart from 'react-apexcharts'
 const MinuteChart = ({data: {symbol, candles, empty}}) => {
       const chartData = {
             options: {
+                  tooltip: {
+                        enabled: false
+                  },
                   chart: {
                         id: 'apexchart-minute',
                         background: 'black',
                         animations: {
                               enabled: false
+                        },
+                        zoom: {
+                              autoScaleYaxis: true
                         }
+                  },
+                  title: {
+                        text: `${symbol} - 2 Day 1 Minute`
                   },
                   grid: {
                         position: 'back',

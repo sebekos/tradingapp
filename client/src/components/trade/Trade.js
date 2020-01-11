@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from 'react-redux'
-import { getQuote, getYearlyChart } from '../../redux/actions/quote'
+import { getQuote, getYearlyChart, getMinuteChart } from '../../redux/actions/quote'
 import { getUserTrades } from '../../redux/actions/trade'
 import SymbolInfo from './SymbolInfo'
 import TradeItem from './TradeItem'
@@ -8,7 +8,7 @@ import PropTypes from 'prop-types'
 import YearlyChart from "./YearlyChart";
 import MinuteChart from "./MinuteChart";
 
-const Trade = ({getQuote, getYearlyChart, getUserTrades, auth: {tdtoken, token}, quote, trade: {trades}}) => {
+const Trade = ({getQuote, getYearlyChart, getMinuteChart, getUserTrades, auth: {tdtoken, token}, quote, trade: {trades}}) => {
 
     useEffect(() => {
         getUserTrades(token);
@@ -22,8 +22,10 @@ const Trade = ({getQuote, getYearlyChart, getUserTrades, auth: {tdtoken, token},
 
     const onSubmit = e => {
         e.preventDefault();
-        getQuote(symbol.toUpperCase(), tdtoken);
-        getYearlyChart(symbol.toUpperCase(), tdtoken);
+        const upperSymbol = symbol.toUpperCase()
+        getQuote(upperSymbol, tdtoken);
+        getYearlyChart(upperSymbol, tdtoken);
+        getMinuteChart(upperSymbol, tdtoken);
     }
 
     return (
@@ -37,7 +39,7 @@ const Trade = ({getQuote, getYearlyChart, getUserTrades, auth: {tdtoken, token},
                 </form>
             </div>
             {quote.minutechart ? <MinuteChart data={quote.minutechart} /> : null}
-            {quote.yearlychart ? <YearlyChart data={quote.yearlychart} /> : null}
+            {/* {quote.yearlychart ? <YearlyChart data={quote.yearlychart} /> : null} */}
             {quote.data ? <SymbolInfo data={quote.data} /> : null}
             {trades.length > 0 ? trades.map((item, index) => {return <TradeItem key={`trade-${index}`} data={item}/>}): null}
         </div>
@@ -53,7 +55,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
     getQuote,
     getYearlyChart,
-    getUserTrades
+    getUserTrades,
+    getMinuteChart
 }
 
 Trade.propTypes = {
@@ -62,7 +65,8 @@ Trade.propTypes = {
     trade: PropTypes.object.isRequired,
     getQuote: PropTypes.func.isRequired,
     getYearlyChart: PropTypes.func.isRequired,
-    getUserTrades: PropTypes.func.isRequired
+    getUserTrades: PropTypes.func.isRequired,
+    getMinuteChart: PropTypes.func.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Trade);

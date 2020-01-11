@@ -1,4 +1,5 @@
 import { LOGIN_SUCCESS, LOGIN_FAIL, USER_LOADED, AUTH_ERROR, O_AUTH_SUCCESS, LOGOUT, CLEAR_PROFILE } from "../constants/types";
+import { setAlert } from './alert'
 import setAuthToken from '../../utils/setAuthToken';
 import axios from "axios";
 import qs from 'query-string'
@@ -6,7 +7,6 @@ import qs from 'query-string'
 // Load user
 export const loadUser = () => async dispatch => {
     if (localStorage.token) {
-      console.log('load user token')
       setAuthToken(localStorage.token);
     }
     try {
@@ -67,9 +67,11 @@ export const oAuthLogin = token => async dispatch => {
           type: O_AUTH_SUCCESS,
           payload: res.data
       });
+      setAlert('oAuth success', 'success');
   } catch (err) {
       const errors = err.response.data.errors;
       console.log(errors);
+      setAlert('oAuth failed', 'danger');
   }
 };
 

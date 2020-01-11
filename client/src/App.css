@@ -204,8 +204,8 @@ button {
 
 .yearly-chart-container{
     margin: auto;
-    max-width: 400px;
     text-align: center;
+    max-width: fit-content;
 }
 
 /* Alerts and buttons */

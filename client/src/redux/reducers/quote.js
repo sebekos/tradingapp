@@ -1,8 +1,9 @@
-import { QUOTE_SUCCESS, QUOTE_FAILED, YEARLY_CHART_SUCCESS, CHART_FAILED } from "../constants/types";
+import { QUOTE_SUCCESS, QUOTE_FAILED, MINUTE_CHART_SUCCESS, YEARLY_CHART_SUCCESS, CHART_FAILED } from "../constants/types";
 
 const initialState = {
     symbol: '',
     data: null,
+    minutechart: null,
     yearlychart: null,
     loading: true
 };
@@ -17,6 +18,12 @@ export default function(state = initialState, action) {
             symbol: payload.symbol,
             loading: false
           };
+        case MINUTE_CHART_SUCCESS:
+          return {
+            ...state,
+            minutechart: payload,
+            loading: false
+          }
         case YEARLY_CHART_SUCCESS:
           return {
             ...state,

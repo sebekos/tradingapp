@@ -6,6 +6,7 @@ import SymbolInfo from './SymbolInfo'
 import TradeItem from './TradeItem'
 import PropTypes from 'prop-types'
 import YearlyChart from "./YearlyChart";
+import MinuteChart from "./MinuteChart";
 
 const Trade = ({getQuote, getYearlyChart, getUserTrades, auth: {tdtoken, token}, quote, trade: {trades}}) => {
 
@@ -35,6 +36,7 @@ const Trade = ({getQuote, getYearlyChart, getUserTrades, auth: {tdtoken, token},
                     </div>
                 </form>
             </div>
+            {quote.minutechart ? <MinuteChart data={quote.minutechart} /> : null}
             {quote.yearlychart ? <YearlyChart data={quote.yearlychart} /> : null}
             {quote.data ? <SymbolInfo data={quote.data} /> : null}
             {trades.length > 0 ? trades.map((item, index) => {return <TradeItem key={`trade-${index}`} data={item}/>}): null}

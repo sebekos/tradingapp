@@ -1,4 +1,4 @@
-import { QUOTE_SUCCESS, QUOTE_FAILED, YEARLY_CHART_SUCCESS, CHART_FAILED } from "../constants/types";
+import { QUOTE_SUCCESS, QUOTE_FAILED, YEARLY_CHART_SUCCESS, MINUTE_CHART_SUCCESS, CHART_FAILED } from "../constants/types";
 import { setAlert } from './alert'
 import axios from "axios";
 

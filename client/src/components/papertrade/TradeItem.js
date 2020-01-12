@@ -2,6 +2,10 @@ import React from 'react'
 import Moment from 'react-moment'
 
 const TradeItem = ({data: {_id, symbol, shares, entry_price, entry_date}}) => {
+      const onClose = e => {
+            console.log(e.target.getAttribute("tradeid"));
+      }
+
       return (
             <div id={_id} className='trade-item'>
                   <div>
@@ -11,7 +15,7 @@ const TradeItem = ({data: {_id, symbol, shares, entry_price, entry_date}}) => {
                   <div>{shares}</div>
                   <div>{entry_price}</div>
                   <div>
-                        <button className="btn btn-danger btn-trade">Close</button>
+                        <button tradeid={_id} onClick={onClose} className="btn btn-danger btn-trade">Close</button>
                   </div>
             </div>
       )

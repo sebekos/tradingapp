@@ -71,4 +71,52 @@ router.post(
     }
 );
 
+// @route       POST api/trade/close
+// @description Close trade
+// @access      Private
+router.post(
+    "/close",
+    [
+        auth,
+        [
+            check("id", "ID is required")
+                .not()
+                .isEmpty(),
+            check("exit_price", "Exit price is required")
+                .not()
+                .isEmpty()
+        ]
+    ],
+    async (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
+        const userid = req.user.id;
+        const tradeid = req.body.id;
+        const exit_price = req.body.exit_price
+        // Find trade by ID
+        try {
+            let trade = await Trade.findById(tradeid);
+            if(trade && userid !== trade.user){
+                return res.status(401).json({ msg: "User not authorized" });
+            }
+            if(trade) {
+                trade = await Trade.findOneAndUpdate(
+                    { _id: tradeid },
+                    { 
+                        $set: {
+                            exit_price: exit_price
+                        }
+                    },
+                    { new: true }
+                );
+                return res.json(trade);
+            }
+        } catch (err) {
+            res.status(500).send("Server Error");
+        }
+    }
+);
+
 module.exports = router;

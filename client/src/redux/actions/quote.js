@@ -22,6 +22,22 @@ export const getQuote = (symbol, tdtoken) => async dispatch => {
       }
 };
 
+// Get direct quote
+export const getDirectQuote = (symbol, tdtoken) => async dispatch => {
+      delete axios.defaults.headers.common['x-auth-token'];
+      const api = 'https://api.tdameritrade.com/v1/marketdata/' + symbol + '/quotes?apikey=SEBEKOS6';
+      const token = 'Bearer ' + tdtoken;
+      try {
+            const res = await axios.get(api , { headers: {"Authorization" : token } });
+            return res.data;
+      } catch (err) {
+            dispatch({
+                  type: QUOTE_FAILED
+            });
+            dispatch(setAlert('Please login oAuth, direct quote failed', 'danger'))
+      }
+};
+
 // Get minute chart
 export const getMinuteChart = (symbol, tdtoken) => async dispatch => {
       delete axios.defaults.headers.common['x-auth-token'];

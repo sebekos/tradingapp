@@ -1,4 +1,5 @@
-import { TRADE_SUCCESS, TRADE_FAILURE, GET_USER_TRADES, GET_TRADES_FAILED } from "../constants/types";
+import { TRADE_SUCCESS, CLOSE_TRADE, TRADE_FAILURE, GET_USER_TRADES, GET_TRADES_FAILED } from "../constants/types";
+import { getDirectQuote } from './quote'
 import { setAlert } from './alert'
 import axios from "axios";
 
@@ -21,7 +22,7 @@ export const getUserTrades = (token) => async dispatch => {
       }
 }
 
-// Get quote
+// Submit trade
 export const newTrade = (formData, token) => async dispatch => {
       axios.defaults.headers.common['x-auth-token'] = token;
       const config = {
@@ -42,6 +43,37 @@ export const newTrade = (formData, token) => async dispatch => {
                   type: TRADE_FAILURE,
                   errors: errors
             });
-            dispatch(setAlert('User not authorized', 'danger'))
+            dispatch(setAlert('User not authorized', 'danger'));
+      }
+};
+
+// Close trade
+export const closeTrade = (id, symbol, token, tdtoken) => async dispatch => {
+      const config = {
+            headers: {
+                  "Content-Type": "application/json"
+            }
+      };
+      try {
+            const direct = await dispatch(getDirectQuote(symbol, tdtoken));
+            const price = direct[symbol]["askPrice"];
+            const body = JSON.stringify({
+                  id: id,
+                  exit_price: price
+            });
+            axios.defaults.headers.common['x-auth-token'] = token;
+            const res = await axios.post("/api/trade/close", body, config);
+            dispatch({
+                  type: CLOSE_TRADE,
+                  payload: res.data
+            });
+            dispatch(setAlert('Trade closed', 'success'));
+      } catch (error) {
+            const errors = error.response.data.errors;
+            dispatch({
+                  type: TRADE_FAILURE,
+                  errors: errors
+            });
+            dispatch(setAlert('User not authorized, sign in oAuth', 'danger'));
       }
 };

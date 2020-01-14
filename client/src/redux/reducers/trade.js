@@ -1,4 +1,4 @@
-import { TRADE_SUCCESS, TRADE_FAILURE, GET_USER_TRADES, GET_TRADES_FAILED } from "../constants/types";
+import { TRADE_SUCCESS, CLOSE_TRADE, TRADE_FAILURE, GET_USER_TRADES, GET_TRADES_FAILED } from "../constants/types";
 
 const initialState = {
     trades: [],
@@ -18,6 +18,18 @@ export default function(state = initialState, action) {
           return {
             ...state,
             trades: [payload, ...state.trades],
+            loading: false
+          };
+        case CLOSE_TRADE:
+          const updatedTrades = state.trades.map( item => {
+            if(payload._id === item._id){
+              return payload;
+            }
+            return item;
+          });
+          return {
+            ...state,
+            trades: updatedTrades,
             loading: false
           };
         case TRADE_FAILURE:

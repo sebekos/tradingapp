@@ -1,9 +1,13 @@
 import React from 'react'
 import Moment from 'react-moment'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+import { closeTrade } from '../../redux/actions/trade'
 
-const TradeItem = ({data: {_id, symbol, shares, entry_price, entry_date}}) => {
+const TradeItem = ({data: {_id, symbol, shares, entry_price, entry_date}, auth: {token, tdtoken}, closeTrade}) => {
       const onClose = e => {
-            console.log(e.target.getAttribute("tradeid"));
+            console.log('Closing trade...');
+            closeTrade( _id, symbol, token, tdtoken);
       }
 
       return (
@@ -15,10 +19,22 @@ const TradeItem = ({data: {_id, symbol, shares, entry_price, entry_date}}) => {
                   <div>{shares}</div>
                   <div>{entry_price}</div>
                   <div>
-                        <button tradeid={_id} onClick={onClose} className="btn btn-danger btn-trade">Close</button>
+                        <button onClick={onClose} className="btn btn-danger btn-trade">Close</button>
                   </div>
             </div>
       )
 }
 
-export default TradeItem;
+const mapStateToProps = state => ({
+      auth: state.auth
+})
+
+const mapDispatchToProps = {
+      closeTrade
+}
+
+TradeItem.propTypes = {
+      closeTrade: PropTypes.func.isRequired
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TradeItem);

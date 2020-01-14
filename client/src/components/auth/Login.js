@@ -18,7 +18,6 @@ const Login = ({ login, auth: { isAuthenticated } }) => {
     };
 
     const onLogin = () => {
-        console.log(formData);
         login(formData);
     };
 

@@ -191,9 +191,23 @@ button {
     width: 100%;
 }
 
+.trade-item-header{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    max-width: 700px;
+    margin: 2px auto;
+    color: white;
+    background-color: black;
+    border: 1px solid grey;
+    border-collapse: collapse;
+    padding: 5px;
+    align-items: center;
+    justify-items: center;
+}
+
 .trade-item{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr; 
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr; 
     max-width: 700px;
     white-space: nowrap;
     margin: 2px auto;

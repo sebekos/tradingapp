@@ -41,6 +41,14 @@ const PaperTrade = ({getQuote, getYearlyChart, getMinuteChart, getUserTrades, au
             {quote.minutechart ? <MinuteChart data={quote.minutechart} /> : null}
             {quote.yearlychart ? <YearlyChart data={quote.yearlychart} /> : null}
             {quote.data ? <SymbolInfo data={quote.data} /> : null}
+            <div class='trade-item-header'>
+                <div>Entry Time</div>
+                <div>Symbol</div>
+                <div>Shares</div>
+                <div>Entry</div>
+                <div>Exit</div>
+                <div>Close</div>
+            </div>
             {trades.length > 0 ? trades.map((item, index) => {return <TradeItem key={`trade-${index}`} data={item}/>}): null}
         </div>
     );

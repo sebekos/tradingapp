@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { closeTrade } from '../../redux/actions/trade'
 
-const TradeItem = ({data: {_id, symbol, shares, entry_price, entry_date}, auth: {token, tdtoken}, closeTrade}) => {
+const TradeItem = ({data: {_id, symbol, shares, entry_price, entry_date, exit_price}, auth: {token, tdtoken}, closeTrade}) => {
       const onClose = e => {
             console.log('Closing trade...');
             closeTrade( _id, symbol, token, tdtoken);
@@ -18,6 +18,7 @@ const TradeItem = ({data: {_id, symbol, shares, entry_price, entry_date}, auth: 
                   <div>{symbol}</div>
                   <div>{shares}</div>
                   <div>{entry_price}</div>
+                  <div>{exit_price ? exit_price : ' '}</div>
                   <div>
                         <button onClick={onClose} className="btn btn-danger btn-trade">Close</button>
                   </div>

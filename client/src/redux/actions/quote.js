@@ -41,7 +41,9 @@ export const getDirectQuote = (symbol, tdtoken) => async dispatch => {
 // Get minute chart
 export const getMinuteChart = (symbol, tdtoken) => async dispatch => {
       delete axios.defaults.headers.common['x-auth-token'];
-      const api = 'https://api.tdameritrade.com/v1/marketdata/' + symbol + '/pricehistory?periodType=day&period=2&frequencyType=minute'
+      const endDate = new Date().getTime();
+      const startDate = endDate - 30*3600*1000; // Minus 30 hours
+      const api = `https://api.tdameritrade.com/v1/marketdata/${symbol}/pricehistory?frequencyType=minute&endDate=${endDate}&startDate=${startDate}`
       const token = 'Bearer ' + tdtoken;
       try {
             const res = await axios.get(api , { headers: {"Authorization" : token } });

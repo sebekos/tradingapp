@@ -41,7 +41,7 @@ const PaperTrade = ({getQuote, getYearlyChart, getMinuteChart, getUserTrades, au
             {quote.minutechart ? <MinuteChart data={quote.minutechart} /> : null}
             {quote.yearlychart ? <YearlyChart data={quote.yearlychart} /> : null}
             {quote.data ? <SymbolInfo data={quote.data} /> : null}
-            <div class='trade-item-header'>
+            <div className='trade-item-header'>
                 <div>Entry Time</div>
                 <div>Symbol</div>
                 <div>Shares</div>

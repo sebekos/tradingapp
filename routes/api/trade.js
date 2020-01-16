@@ -17,6 +17,7 @@ router.get("/user", auth, async (req, res) => {
             }
         }
         ]).sort({ listdate: -1 });
+        console.log(trades);
         res.json(trades);
     } catch (err) {
         res.status(500).send("Server Error");

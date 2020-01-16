@@ -278,3 +278,16 @@ button {
     color: #333;
     border: #ccc solid 1px;
 }
+
+.user-container{
+    max-width: 700px;
+    text-align: center;
+    margin: 90px auto 0;
+    border: 1px solid grey;
+    background-color: black;
+    color: white;
+}
+
+.user-name{
+    font-size: 30px;
+}

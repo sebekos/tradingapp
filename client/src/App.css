@@ -161,37 +161,37 @@ button {
     text-align: center;
 }
 
-.oauth-container div{
+.oauth-container div {
     margin: 10px auto;
 }
 
-.symbol-container table{
+.symbol-container table {
     margin: 20px auto;
     color: white;
     background-color: black;
     border-collapse: collapse;
 }
 
-.symbol-container table td{
+.symbol-container table td {
     border: 1px solid grey;
     padding: 5px 10px;
 }
 
-.symbol-container table th{
+.symbol-container table th {
     border: 1px solid grey;
     padding: 15px;
 }
 
-.td-trade{
+.td-trade {
     padding: 0px !important;
 }
 
-.btn-trade{
+.btn-trade {
     height: 100%;
     width: 100%;
 }
 
-.trade-item-header{
+.trade-item-header {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     max-width: 700px;
@@ -205,9 +205,9 @@ button {
     justify-items: center;
 }
 
-.trade-item{
+.trade-item {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr; 
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     max-width: 700px;
     white-space: nowrap;
     margin: 2px auto;
@@ -220,14 +220,14 @@ button {
     justify-items: center;
 }
 
-.yearly-chart-container{
+.yearly-chart-container {
     margin: auto;
     text-align: center;
     max-width: fit-content;
 }
 
 /* Alerts and buttons */
-.alerts-container{
+.alerts-container {
     position: absolute;
     z-index: 100;
     right: 0;
@@ -236,7 +236,7 @@ button {
     width: 400px;
 }
 
-.alert-msg-div{
+.alert-msg-div {
     min-width: 300px;
 }
 
@@ -279,7 +279,7 @@ button {
     border: #ccc solid 1px;
 }
 
-.user-container{
+.user-container {
     max-width: 700px;
     text-align: center;
     margin: 90px auto 0;
@@ -288,6 +288,6 @@ button {
     color: white;
 }
 
-.user-name{
+.user-name {
     font-size: 30px;
 }

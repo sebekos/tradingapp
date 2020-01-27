@@ -1,4 +1,12 @@
-import { LOGIN_SUCCESS, LOGIN_FAIL, USER_LOADED, AUTH_ERROR, AUTH_LOADING, O_AUTH_SUCCESS, LOGOUT } from "../constants/types";
+import {
+    LOGIN_SUCCESS,
+    LOGIN_FAIL,
+    USER_LOADED,
+    AUTH_ERROR,
+    AUTH_LOADING,
+    O_AUTH_SUCCESS,
+    LOGOUT
+} from "../constants/types";
 
 const initialState = {
     token: localStorage.getItem("token"),
@@ -15,17 +23,17 @@ export default function(state = initialState, action) {
 
     switch (type) {
         case AUTH_LOADING:
-          return {
-            ...state,
-            loading: true
-          };
+            return {
+                ...state,
+                loading: true
+            };
         case USER_LOADED:
-          return {
-            ...state,
-            isAuthenticated: true,
-            loading: false,
-            user: payload
-          };
+            return {
+                ...state,
+                isAuthenticated: true,
+                loading: false,
+                user: payload
+            };
         case LOGIN_SUCCESS:
             var t1 = new Date();
             t1.setSeconds(t1.getMinutes() + 30);

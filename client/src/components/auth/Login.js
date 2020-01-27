@@ -28,13 +28,7 @@ const Login = ({ login, auth: { isAuthenticated } }) => {
             {isAuthenticated ? <Redirect to="/dashboard" /> : null}
             <div className="login-container form">
                 <div className="form-group">
-                    <input
-                        name="username"
-                        placeholder="Username"
-                        type="text"
-                        onChange={onChange}
-                        value={username}
-                    />
+                    <input name="username" placeholder="Username" type="text" onChange={onChange} value={username} />
                 </div>
                 <div className="form-group">
                     <input

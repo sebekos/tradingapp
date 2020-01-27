@@ -1,11 +1,10 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { logout } from '../../redux/actions/auth'
+import { logout } from "../../redux/actions/auth";
 import PropTypes from "prop-types";
 
 const Navbar = ({ isAuthenticated, logout }) => {
-
     const onLogout = e => {
         e.preventDefault();
         logout();
@@ -26,7 +25,9 @@ const Navbar = ({ isAuthenticated, logout }) => {
                 <Link to="/oauth">oAuth</Link>
             </div>
             <div className="links-item">
-                <Link onClick={onLogout} to="/">Logout</Link>
+                <Link onClick={onLogout} to="/">
+                    Logout
+                </Link>
             </div>
         </Fragment>
     );
@@ -41,9 +42,7 @@ const Navbar = ({ isAuthenticated, logout }) => {
     return (
         <div className="navbar">
             <div className="title">Trading Patterns</div>
-            <div className="links">
-                {isAuthenticated ? authLinks : guestLinks}
-            </div>
+            <div className="links">{isAuthenticated ? authLinks : guestLinks}</div>
         </div>
     );
 };

@@ -1,47 +1,56 @@
 import React, { useState, useEffect } from "react";
-import { connect } from 'react-redux'
-import { getQuote, getYearlyChart, getMinuteChart } from '../../redux/actions/quote'
-import { getUserTrades } from '../../redux/actions/trade'
-import SymbolInfo from './SymbolInfo'
-import TradeItem from './TradeItem'
-import PropTypes from 'prop-types'
+import { connect } from "react-redux";
+import { getQuote, getYearlyChart, getMinuteChart } from "../../redux/actions/quote";
+import { getUserTrades } from "../../redux/actions/trade";
+import SymbolInfo from "./SymbolInfo";
+import TradeItem from "./TradeItem";
+import PropTypes from "prop-types";
 import YearlyChart from "./YearlyChart";
 import MinuteChart from "./MinuteChart";
 
-const PaperTrade = ({getQuote, getYearlyChart, getMinuteChart, getUserTrades, auth: {tdtoken, token}, quote, trade: {trades}}) => {
-
+const PaperTrade = ({
+    getQuote,
+    getYearlyChart,
+    getMinuteChart,
+    getUserTrades,
+    auth: { tdtoken, token },
+    quote,
+    trade: { trades }
+}) => {
     useEffect(() => {
         getUserTrades(token);
     }, []);
 
-    const [symbol, setSymbol] = useState('')
+    const [symbol, setSymbol] = useState("");
 
     const onChange = e => {
         setSymbol(e.target.value);
-    }
+    };
 
     const onSubmit = e => {
         e.preventDefault();
-        const upperSymbol = symbol.toUpperCase()
+        const upperSymbol = symbol.toUpperCase();
         getQuote(upperSymbol, tdtoken);
         getYearlyChart(upperSymbol, tdtoken);
         getMinuteChart(upperSymbol, tdtoken);
-    }
+    };
 
     return (
         <div className="container">
             <div className="trade-container form">
                 <form onSubmit={onSubmit}>
-                    <div className='form-group'>
+                    <div className="form-group">
                         <input onChange={onChange} placeholder="Symbol" type="text" value={symbol} />
-                        <button type="submit" className="btn btn-primary">Search</button>
+                        <button type="submit" className="btn btn-primary">
+                            Search
+                        </button>
                     </div>
                 </form>
             </div>
             {quote.minutechart ? <MinuteChart data={quote.minutechart} /> : null}
             {quote.yearlychart ? <YearlyChart data={quote.yearlychart} /> : null}
             {quote.data ? <SymbolInfo data={quote.data} /> : null}
-            <div className='trade-item-header'>
+            <div className="trade-item-header">
                 <div>Entry Time</div>
                 <div>Symbol</div>
                 <div>Shares</div>
@@ -49,7 +58,11 @@ const PaperTrade = ({getQuote, getYearlyChart, getMinuteChart, getUserTrades, au
                 <div>Exit</div>
                 <div>Close</div>
             </div>
-            {trades.length > 0 ? trades.map((item, index) => {return <TradeItem key={`trade-${index}`} data={item}/>}): null}
+            {trades.length > 0
+                ? trades.map((item, index) => {
+                      return <TradeItem key={`trade-${index}`} data={item} />;
+                  })
+                : null}
         </div>
     );
 };
@@ -65,7 +78,7 @@ const mapDispatchToProps = {
     getYearlyChart,
     getUserTrades,
     getMinuteChart
-}
+};
 
 PaperTrade.propTypes = {
     auth: PropTypes.object.isRequired,

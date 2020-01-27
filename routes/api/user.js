@@ -18,10 +18,7 @@ router.post(
             .not()
             .isEmpty(),
         check("email", "Password is required").isEmail(),
-        check(
-            "password",
-            "Please enter a password with 6 or more characters"
-        ).isLength({ min: 6 }),
+        check("password", "Please enter a password with 6 or more characters").isLength({ min: 6 }),
         check("registerkey", "Key is required")
             .not()
             .isEmpty()
@@ -46,9 +43,7 @@ router.post(
         try {
             let user = await User.findOne({ email });
             if (user) {
-                return res
-                    .status(400)
-                    .json({ errors: [{ msg: "User already exists" }] });
+                return res.status(400).json({ errors: [{ msg: "User already exists" }] });
             }
             user = new User({
                 name,
@@ -68,15 +63,10 @@ router.post(
                 }
             };
 
-            jwt.sign(
-                payload,
-                process.env.jwtSecret,
-                { expiresIn: 360000 },
-                (err, token) => {
-                    if (err) throw err;
-                    res.json({ token });
-                }
-            );
+            jwt.sign(payload, process.env.jwtSecret, { expiresIn: 360000 }, (err, token) => {
+                if (err) throw err;
+                res.json({ token });
+            });
         } catch (err) {
             res.status(500).send("Server Error");
         }

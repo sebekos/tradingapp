@@ -11,18 +11,18 @@ const Trade = require("../../models/Trade");
 router.get("/user", auth, async (req, res) => {
     try {
         const trades = await Trade.aggregate([
-        {
-            $match: {
-            user: `${req.user.id}`
+            {
+                $match: {
+                    user: `${req.user.id}`
+                }
             }
-        }
         ]).sort({ listdate: -1 });
         console.log(trades);
         res.json(trades);
     } catch (err) {
         res.status(500).send("Server Error");
     }
-    });
+});
 
 // @route       POST api/trade
 // @description Create trade
@@ -95,17 +95,17 @@ router.post(
         }
         const userid = req.user.id;
         const tradeid = req.body.id;
-        const exit_price = req.body.exit_price
+        const exit_price = req.body.exit_price;
         // Find trade by ID
         try {
             let trade = await Trade.findById(tradeid);
-            if(trade && userid !== trade.user){
+            if (trade && userid !== trade.user) {
                 return res.status(401).json({ msg: "User not authorized" });
             }
-            if(trade) {
+            if (trade) {
                 trade = await Trade.findOneAndUpdate(
                     { _id: tradeid },
-                    { 
+                    {
                         $set: {
                             exit_price: exit_price
                         }

@@ -15,9 +15,10 @@ router.get("/user", auth, async (req, res) => {
                 $match: {
                     user: `${req.user.id}`
                 }
-            },
-            { $limit: 20 }
-        ]).sort({ entry_date: -1 });
+            }
+        ])
+            .sort({ entry_date: -1 })
+            .limit(20);
         res.json(trades);
     } catch (err) {
         res.status(500).send("Server Error");

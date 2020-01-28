@@ -15,7 +15,8 @@ router.get("/user", auth, async (req, res) => {
                 $match: {
                     user: `${req.user.id}`
                 }
-            }
+            },
+            { $limit: 20 }
         ]).sort({ entry_date: -1 });
         res.json(trades);
     } catch (err) {

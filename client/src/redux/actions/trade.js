@@ -69,10 +69,9 @@ export const closeTrade = (id, symbol, token, tdtoken) => async dispatch => {
         });
         dispatch(setAlert("Trade closed", "success"));
     } catch (error) {
-        const errors = error.response.data.errors;
         dispatch({
             type: TRADE_FAILURE,
-            errors: errors
+            errors: error
         });
         dispatch(setAlert("User not authorized, sign in oAuth", "danger"));
     }

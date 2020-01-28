@@ -10,9 +10,11 @@ const TradeItem = ({
     closeTrade
 }) => {
     const onClose = e => {
-        console.log("Closing trade...");
         closeTrade(_id, symbol, token, tdtoken);
     };
+
+    const num = (exit_price - entry_price) * shares;
+    const profit = parseFloat(Math.round(num * Math.pow(10, 2)) / Math.pow(10, 2)).toFixed(2);
 
     return (
         <div id={_id} className="trade-item">
@@ -24,10 +26,15 @@ const TradeItem = ({
             <div>{entry_price}</div>
             <div>{exit_price ? exit_price : " "}</div>
             <div>
-                <button onClick={onClose} className="btn btn-danger btn-trade">
-                    Close
-                </button>
+                {exit_price ? (
+                    "Closed"
+                ) : (
+                    <button onClick={onClose} className="btn btn-danger btn-trade">
+                        Close
+                    </button>
+                )}
             </div>
+            <div className={profit >= 0 ? "green-trade" : "red-trade"}>{exit_price ? profit : "N/A"}</div>
         </div>
     );
 };

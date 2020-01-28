@@ -193,7 +193,7 @@ button {
 
 .trade-item-header {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     max-width: 700px;
     margin: 2px auto;
     color: white;
@@ -207,7 +207,7 @@ button {
 
 .trade-item {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     max-width: 700px;
     white-space: nowrap;
     margin: 2px auto;
@@ -228,7 +228,7 @@ button {
 
 /* Alerts and buttons */
 .alerts-container {
-    position: absolute;
+    position: fixed;
     z-index: 100;
     right: 0;
     margin-right: 10px;
@@ -290,4 +290,12 @@ button {
 
 .user-name {
     font-size: 30px;
+}
+
+.green-trade {
+    color: #50d890;
+}
+
+.red-trade {
+    color: red;
 }

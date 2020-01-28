@@ -57,6 +57,7 @@ const PaperTrade = ({
                 <div>Entry</div>
                 <div>Exit</div>
                 <div>Close</div>
+                <div>Realized</div>
             </div>
             {trades.length > 0
                 ? trades.map((item, index) => {

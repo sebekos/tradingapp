@@ -3,7 +3,7 @@ import { loadUser } from "../../redux/actions/auth";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-const Dashboard = ({ auth: { token, user } }) => {
+const Dashboard = ({ auth: { token, user }, loadUser }) => {
     useEffect(() => {
         loadUser();
     }, []);
@@ -28,4 +28,4 @@ Dashboard.propTypes = {
     auth: PropTypes.object.isRequired
 };
 
-export default connect(mapStateToProps, null)(Dashboard);
+export default connect(mapStateToProps, { loadUser })(Dashboard);

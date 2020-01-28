@@ -11,7 +11,6 @@ const SymbolInfo = ({
     const [shares, setShares] = useState(100);
 
     const onTrade = e => {
-        console.log(e.target.value);
         const formData = {
             symbol,
             side: e.target.value,
@@ -19,6 +18,12 @@ const SymbolInfo = ({
             entry_price: lastPrice
         };
         newTrade(formData, token);
+    };
+
+    const onShares = e => {
+        if (e.target.value > 100) {
+            setShares(e.target.value);
+        }
     };
 
     return (
@@ -53,6 +58,12 @@ const SymbolInfo = ({
                         </td>
                     </tr>
                     <tr>
+                        <td>Shares</td>
+                        <td>
+                            <input type="number" name="shares" value={shares} onChange={onShares} step="100"></input>
+                        </td>
+                    </tr>
+                    <tr>
                         <td className="td-trade">
                             <button value="1" onClick={onTrade} className="btn btn-success btn-trade">
                                 Buy
@@ -75,10 +86,14 @@ const mapStateToProps = state => ({
     quote: state.quote
 });
 
+const mapDispatchToProps = {
+    newTrade
+};
+
 SymbolInfo.propTypes = {
     newTrade: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
     quote: PropTypes.object.isRequired
 };
 
-export default connect(mapStateToProps, { newTrade })(SymbolInfo);
+export default connect(mapStateToProps, mapDispatchToProps)(SymbolInfo);

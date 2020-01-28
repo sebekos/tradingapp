@@ -84,7 +84,6 @@ export const oAuthLogin = token => async dispatch => {
 
 // oAuthRefresh
 export const oAuthRefresh = token => async dispatch => {
-    console.log("Refreshing token...");
     delete axios.defaults.headers.common["x-auth-token"];
     const config = {
         headers: {

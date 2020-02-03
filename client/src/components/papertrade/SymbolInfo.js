@@ -6,18 +6,12 @@ import { connect } from "react-redux";
 const SymbolInfo = ({
     data: { symbol, description, lastPrice, lastSize, bidPrice, bidSize, askPrice, askSize },
     newTrade,
-    auth: { token }
+    auth: { token, tdtoken }
 }) => {
     const [shares, setShares] = useState(100);
 
     const onTrade = e => {
-        const formData = {
-            symbol,
-            side: e.target.value,
-            shares: shares,
-            entry_price: lastPrice
-        };
-        newTrade(formData, token);
+        newTrade(symbol, e.target.value, shares, token, tdtoken);
     };
 
     const onShares = e => {

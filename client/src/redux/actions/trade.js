@@ -23,27 +23,35 @@ export const getUserTrades = token => async dispatch => {
 };
 
 // Submit trade
-export const newTrade = (formData, token) => async dispatch => {
-    axios.defaults.headers.common["x-auth-token"] = token;
+export const newTrade = (symbol, side, shares, token, tdtoken) => async dispatch => {
     const config = {
         headers: {
             "Content-Type": "application/json"
         }
     };
-    const body = JSON.stringify(formData);
     try {
+        const direct = await dispatch(getDirectQuote(symbol, tdtoken));
+        console.log(direct);
+        const price = direct[symbol]["askPrice"];
+        const body = JSON.stringify({
+            symbol,
+            entry_price: price,
+            shares,
+            side
+        });
+        axios.defaults.headers.common["x-auth-token"] = token;
         const res = await axios.post("/api/trade", body, config);
         dispatch({
             type: TRADE_SUCCESS,
             payload: res.data
         });
-    } catch (err) {
-        const errors = err.response.data.errors;
+        dispatch(setAlert("Trade success", "success"));
+    } catch (error) {
         dispatch({
             type: TRADE_FAILURE,
-            errors: errors
+            errors: error
         });
-        dispatch(setAlert("User not authorized", "danger"));
+        dispatch(setAlert("User not authorized, sign in oAuth", "danger"));
     }
 };
 
@@ -56,7 +64,7 @@ export const closeTrade = (id, symbol, token, tdtoken) => async dispatch => {
     };
     try {
         const direct = await dispatch(getDirectQuote(symbol, tdtoken));
-        const price = direct[symbol]["askPrice"];
+        const price = direct[symbol]["bidPrice"];
         const body = JSON.stringify({
             id: id,
             exit_price: price

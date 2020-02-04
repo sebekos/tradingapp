@@ -31,7 +31,6 @@ export const newTrade = (symbol, side, shares, token, tdtoken) => async dispatch
     };
     try {
         const direct = await dispatch(getDirectQuote(symbol, tdtoken));
-        console.log(direct);
         const price = direct[symbol]["askPrice"];
         const body = JSON.stringify({
             symbol,

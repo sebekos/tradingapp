@@ -12,6 +12,7 @@ import OAuth from "./components/oauth/OAuth";
 import Alert from "./components/layout/Alert";
 import PaperTrade from "./components/papertrade/PaperTrade";
 import LiveTrade from "./components/LiveTrade/LiveTrade";
+import Spinner from "./components/layout/Spinner";
 
 const App = () => {
     useEffect(() => {
@@ -22,6 +23,7 @@ const App = () => {
         <Provider store={store}>
             <Router>
                 <Navbar />
+                <Spinner />
                 <Alert />
                 <Switch>
                     <Route exact path="/" component={Login} />

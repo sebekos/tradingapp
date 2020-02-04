@@ -1,6 +1,7 @@
 import { TRADE_SUCCESS, CLOSE_TRADE, TRADE_FAILURE, GET_USER_TRADES, GET_TRADES_FAILED } from "../constants/types";
 import { getDirectQuote } from "./quote";
 import { setAlert } from "./alert";
+import { setLoading } from "./spinner";
 import axios from "axios";
 
 // Get user trades
@@ -24,6 +25,7 @@ export const getUserTrades = token => async dispatch => {
 
 // Submit trade
 export const newTrade = (symbol, side, shares, token, tdtoken) => async dispatch => {
+    dispatch(setLoading(true));
     const config = {
         headers: {
             "Content-Type": "application/json"
@@ -52,10 +54,12 @@ export const newTrade = (symbol, side, shares, token, tdtoken) => async dispatch
         });
         dispatch(setAlert("User not authorized, sign in oAuth", "danger"));
     }
+    dispatch(setLoading(false));
 };
 
 // Close trade
 export const closeTrade = (id, symbol, token, tdtoken) => async dispatch => {
+    dispatch(setLoading(true));
     const config = {
         headers: {
             "Content-Type": "application/json"
@@ -82,4 +86,5 @@ export const closeTrade = (id, symbol, token, tdtoken) => async dispatch => {
         });
         dispatch(setAlert("User not authorized, sign in oAuth", "danger"));
     }
+    dispatch(setLoading(false));
 };

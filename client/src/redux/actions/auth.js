@@ -8,12 +8,14 @@ import {
     CLEAR_PROFILE
 } from "../constants/types";
 import { setAlert } from "./alert";
+import { setLoading } from "./spinner";
 import setAuthToken from "../../utils/setAuthToken";
 import axios from "axios";
 import qs from "query-string";
 
 // Load user
 export const loadUser = () => async dispatch => {
+    dispatch(setLoading(true));
     if (localStorage.token) {
         setAuthToken(localStorage.token);
     }
@@ -28,6 +30,7 @@ export const loadUser = () => async dispatch => {
             type: AUTH_ERROR
         });
     }
+    dispatch(setLoading(false));
 };
 
 // Login User

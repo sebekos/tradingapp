@@ -7,10 +7,12 @@ import {
 } from "../constants/types";
 import { setAlert } from "./alert";
 import { candleData } from "../../utils/quote";
+import { setLoading } from "./spinner";
 import axios from "axios";
 
 // Get quote
 export const getQuote = (symbol, tdtoken) => async dispatch => {
+    dispatch(setLoading(true));
     delete axios.defaults.headers.common["x-auth-token"];
     const api = "https://api.tdameritrade.com/v1/marketdata/" + symbol + "/quotes?apikey=SEBEKOS6";
     const token = "Bearer " + tdtoken;
@@ -26,6 +28,7 @@ export const getQuote = (symbol, tdtoken) => async dispatch => {
         });
         dispatch(setAlert("Please login oAuth", "danger"));
     }
+    dispatch(setLoading(false));
 };
 
 // Get direct quote
